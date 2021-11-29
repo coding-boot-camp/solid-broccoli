@@ -26,6 +26,7 @@ THEN my user account is created and I am logged in to the site
 TODO
 WHEN I enter my account’s email address and password and click on the login button
 THEN I the modal closes and I am logged in to the site
+
 WHEN I am logged in to the site
 THEN the menu options change to Search for Books, an option to see my saved books, and Logout
 WHEN I am logged in and enter a search term in the input field and click the submit button
