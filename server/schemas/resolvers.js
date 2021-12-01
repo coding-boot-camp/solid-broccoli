@@ -28,6 +28,11 @@ const resolvers = {
       }
       const token = signToken(user)
       return { token, user }
+    },
+    saveBook: async (_parent, { authors, description, bookId, image, link, title }, context) => {
+      console.log('Would have saved book ' + title)
+      console.log('context headers: ' + context.headers)
+      throw Error('TODO')
     }
   }
 };
