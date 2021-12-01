@@ -14,18 +14,6 @@ const resolvers = {
       }
       throw new AuthenticationError('Not logged in')
     },
-    helloWorld: () => {
-      return 'Hello world!';
-    }
-/*     getMe: async () => {
-      if (!context.user) {
-        throw new AuthenticationError('You need to be logged in!')
-      }
-      const userData = await User.findOne({ _id: context.user._id })
-        .select('-__v -password')
-        .populate('books')
-      return userData
-    } */
   },
   Mutation: {
     addUser: async (_parent, args) => {

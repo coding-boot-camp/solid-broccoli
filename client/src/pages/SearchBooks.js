@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
-import { useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import { ADD_BOOK } from '../utils/mutations';
+import { ME } from '../utils/queries';
 import Auth from '../utils/auth';
 import { searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
@@ -9,38 +10,22 @@ import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 const SearchBooks = () => {
   const [searchedBooks, setSearchedBooks] = useState([]);
   const [searchInput, setSearchInput] = useState('');
-  const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
   const [addBook] = useMutation(ADD_BOOK, {
-    update(cache, { data: { addBook } }) {
-    }
-  })
-  /*
-  const [addThought, { error }] = useMutation(ADD_THOUGHT, {
-    update(cache, { data: { addThought } }) {
-      try {
-        // could potentially not exist yet, so wrap in a try...catch
-        const { thoughts } = cache.readQuery({ query: QUERY_THOUGHTS });
-        cache.writeQuery({
-          query: QUERY_THOUGHTS,
-          data: { thoughts: [addThought, ...thoughts] }
-        });
-      } catch (e) {
-        console.error(e);
-      }
-
-      // update me object's cache, appending new thought to the end of the array
-      const { me } = cache.readQuery({ query: QUERY_ME });
+    update(cache, { data: { saveBook: me } }) {
       cache.writeQuery({
-        query: QUERY_ME,
-        data: { me: { ...me, thoughts: [...me.thoughts, addThought] } }
+        query: ME,
+        data: { me }
       });
     }
-  });
-  */
+  })
+  const { loading, data: meWrapped } = useQuery(ME)
 
-  useEffect(() => {
-    return () => saveBookIds(savedBookIds);
-  });
+  if (loading) {
+    return <h2>LOADING...</h2>;
+  }
+
+  const { me } = meWrapped
+  const savedBookIds = me.savedBooks.map(it => it.bookId)
 
   // create method to search for books and set state on form submit
   const handleFormSubmit = async (event) => {
@@ -63,6 +48,7 @@ const SearchBooks = () => {
         bookId: book.id,
         authors: book.volumeInfo.authors || ['No author to display'],
         title: book.volumeInfo.title,
+        link: book.volumeInfo.canonicalVolumeLink,
         description: book.volumeInfo.description,
         image: book.volumeInfo.imageLinks?.thumbnail || '',
       }));
@@ -85,7 +71,6 @@ const SearchBooks = () => {
       await addBook({
         variables: bookToSave
       });
-      setSavedBookIds([...savedBookIds, bookToSave.bookId]);
     } catch (e) {
       console.error(e);
     }
@@ -133,6 +118,7 @@ const SearchBooks = () => {
                 ) : null}
                 <Card.Body>
                   <Card.Title>{book.title}</Card.Title>
+                  <Card.Link href={book.link} target="_blank">See on Google</Card.Link>
                   <p className='small'>Authors: {book.authors}</p>
                   <Card.Text>{book.description}</Card.Text>
                   {Auth.loggedIn() && (
