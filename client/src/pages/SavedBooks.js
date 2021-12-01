@@ -20,13 +20,16 @@ const SavedBooks = () => {
           return false;
         }
 
+        console.log('About to get me')
         const response = await getMe(token);
+        console.log('Got me')
 
         if (!response.ok) {
           throw new Error('something went wrong!');
         }
 
         const user = await response.json();
+        console.log(user)
         setUserData(user);
       } catch (err) {
         console.error(err);

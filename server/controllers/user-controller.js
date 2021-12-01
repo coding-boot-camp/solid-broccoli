@@ -1,7 +1,6 @@
 // import user model
 const { User } = require('../models');
 // import sign token function from auth
-const { signToken } = require('../utils/auth');
 
 module.exports = {
   // get a single user by either their id or their username
@@ -15,11 +14,6 @@ module.exports = {
     }
 
     res.json(foundUser);
-  },
-  // save a book to a user's `savedBooks` field by adding it to the set (to prevent duplicates)
-  // user comes from `req.user` created in the auth middleware function
-  async saveBook({ user, body }, res) {
-    throw new Error('Disabled')
   },
   // remove a book from `savedBooks`
   async deleteBook({ user, params }, res) {

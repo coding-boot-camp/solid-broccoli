@@ -5,9 +5,27 @@ const { signToken } = require('../utils/auth')
 
 const resolvers = {
   Query: {
+    me: async (_parent, _args, context) => {
+      if (context.user) {
+        const userData = await User.findOne({ _id: context.user._id })
+          .select('-__v -password')
+          .populate('books')
+        return userData
+      }
+      throw new AuthenticationError('Not logged in')
+    },
     helloWorld: () => {
       return 'Hello world!';
     }
+/*     getMe: async () => {
+      if (!context.user) {
+        throw new AuthenticationError('You need to be logged in!')
+      }
+      const userData = await User.findOne({ _id: context.user._id })
+        .select('-__v -password')
+        .populate('books')
+      return userData
+    } */
   },
   Mutation: {
     addUser: async (_parent, args) => {
@@ -31,7 +49,7 @@ const resolvers = {
     },
     saveBook: async (_parent, body, context) => {
       if (!context.user) {
-        throw new AuthenticationError('You need to be logged in!');
+        throw new AuthenticationError('You need to be logged in!')
       }
       const updatedUser = await User.findOneAndUpdate(
         { _id: context.user._id },

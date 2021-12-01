@@ -28,10 +28,10 @@ WHEN I am logged in to the site
 THEN the menu options change to Search for Books, an option to see my saved books, and Logout
 WHEN I am logged in and enter a search term in the input field and click the submit button
 THEN I am presented with several search results, each featuring a book’s title, author, description, image, and a link to that book on the Google Books site and a button to save a book to my account
-
-TODO
 WHEN I click on the Save button on a book
 THEN that book’s information is saved to my account
+
+TODO
 WHEN I click on the option to see my saved books
 THEN I am presented with all of the books I have saved to my account, each featuring the book’s title, author, description, image, and a link to that book on the Google Books site and a button to remove a book from my account
 WHEN I click on the Remove button on a book

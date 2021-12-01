@@ -23,3 +23,16 @@ export const LOGIN_USER = gql`
     }
   }
 `
+
+export const ADD_BOOK = gql`
+mutation saveBook($description: String!, $bookId: String!, $title: String!) {
+  saveBook(description: $description, bookId: $bookId, title: $title) {
+    _id
+    username
+    savedBooks {
+      title
+    }
+  }
+}
+
+`
