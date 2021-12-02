@@ -23,8 +23,9 @@ const SearchBooks = () => {
     return <h2>LOADING...</h2>;
   }
 
-  const { me } = meWrapped
-  const savedBookIds = me.savedBooks.map(it => it.bookId)
+  const { me } = meWrapped || {}
+  console.log(me)
+  const savedBookIds = (me?.savedBooks || []).map(it => it.bookId)
 
   // create method to search for books and set state on form submit
   const handleFormSubmit = async (event) => {
