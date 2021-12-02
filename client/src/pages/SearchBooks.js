@@ -5,7 +5,6 @@ import { ADD_BOOK } from '../utils/mutations';
 import { ME } from '../utils/queries';
 import Auth from '../utils/auth';
 import { searchGoogleBooks } from '../utils/API';
-import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 
 const SearchBooks = () => {
   const [searchedBooks, setSearchedBooks] = useState([]);
