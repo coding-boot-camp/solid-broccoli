@@ -1,0 +1,22 @@
+{
+  "name": "apollo-server-types",
+  "version": "0.10.0",
+  "description": "Apollo Server shared types",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "keywords": [],
+  "author": "Apollo <opensource@apollographql.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=6"
+  },
+  "dependencies": {
+    "apollo-reporting-protobuf": "^0.8.0",
+    "apollo-server-caching": "^0.7.0",
+    "apollo-server-env": "^3.2.0"
+  },
+  "peerDependencies": {
+    "graphql": "^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0"
+  },
+  "gitHead": "91de501bb389c07ccfc5e684811153267b91e9ac"
+}
