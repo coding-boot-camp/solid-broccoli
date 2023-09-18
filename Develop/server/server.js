@@ -5,6 +5,8 @@ const path = require('path');
 //import authMiddleware from utils/auth.js
 const {authMiddleware} = require('./utils/auth')
 
+//import schemas
+const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 const routes = require('./routes');
 
