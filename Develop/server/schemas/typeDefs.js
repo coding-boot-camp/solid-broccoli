@@ -44,5 +44,7 @@ const typeDefs = gql`
         link: String
     }
 `;
+//input type 'BookInput' is created to handle the parameters required for the saveBook mutation. 
+//Allowing us to pass all book-related data as a single input object
 
 module.exports = typeDefs;
