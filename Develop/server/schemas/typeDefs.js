@@ -1,7 +1,7 @@
 //uses different import due to newer version
-const { gql } = require('@apollo/server');
+//import { ApolloServer } from '@apollo/server';
 
-const typeDefs = gql`
+const typeDefs =`
     type User {
         _id: ID!
         username: String!
@@ -48,3 +48,4 @@ const typeDefs = gql`
 //Allowing us to pass all book-related data as a single input object
 
 module.exports = typeDefs;
+

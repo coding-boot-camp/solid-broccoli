@@ -6,6 +6,7 @@ const { User } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
+  //QUERY OBJECT
   Query: {
     // Query to get the currently authenticated user
     me: async (parent, args, context) => {
@@ -17,6 +18,7 @@ const resolvers = {
       return null;
     },
   },
+  //MUTATION OBJECT
   Mutation: {
     //Mutation to handle user login
     login: async (parent, { email, password }) => {

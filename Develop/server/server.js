@@ -1,9 +1,13 @@
 const express = require('express');
-//import ApolloServer
+//*import ApolloServer 4
 const {ApolloServer} = require('@apollo/server')
+const {expressMiddleware} = require('@apollo/server/express4')
+const {ApolloServerPluginDrainHttpServer} = require('@apollo/server/plugin/drainHttpServer')
+
 const path = require('path');
 //import authMiddleware from utils/auth.js
 const {authMiddleware} = require('./utils/auth')
+
 
 //import schemas
 const { typeDefs, resolvers } = require('./schemas');
@@ -23,11 +27,6 @@ const server = new ApolloServer({
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// if we're in production, serve client/build as static assets
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
-}
-
 //refer to the routes folder to handle routing
 app.use(routes);
 
@@ -40,8 +39,12 @@ db.once('open', () => {
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
   await server.start();
-  server.applyMiddleware({ app });
-  
+
+  app.use(
+    '/graphql',
+    expressMiddleware(server),
+  )
+
   db.once('open', () => {
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
