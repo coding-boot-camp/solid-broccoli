@@ -1,7 +1,6 @@
-//uses different import due to newer version
-//import { ApolloServer } from '@apollo/server';
+const { gql } = require('apollo-server-express');
 
-const typeDefs =`
+const typeDefs = gql`
     type User {
         _id: ID!
         username: String!

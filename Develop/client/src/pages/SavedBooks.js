@@ -43,7 +43,7 @@ const SavedBooks = () => {
       });
 
 
-      const updatedUser = data.removeBook;
+      //const updatedUser = data.removeBook;
 
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
