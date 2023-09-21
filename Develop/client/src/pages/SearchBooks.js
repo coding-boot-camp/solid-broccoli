@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container, Col, Form, Button, Card, Row } from "react-bootstrap";
 
 import Auth from "../utils/auth";
-import { saveBook1, searchGoogleBooks } from "../utils/API";
+import { searchGoogleBooks } from "../utils/API";
 import { saveBookIds, getSavedBookIds } from "../utils/localStorage";
 
 //import the SAVE_BOOK mutation
@@ -122,8 +122,8 @@ const SearchBooks = () => {
         <Row>
           {searchedBooks.map((book) => {
             return (
-              <Col md="4">
-                <Card key={book.bookId} border="dark">
+              <Col md="4" key={book.bookId}>
+                <Card border="dark">
                   {book.image ? (
                     <Card.Img
                       src={book.image}
