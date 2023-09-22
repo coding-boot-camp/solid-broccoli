@@ -23,6 +23,15 @@ const typeDefs = gql`
         user: User!
     }
 
+    input BookInput {
+        bookId: String!
+        authors: [String!]!
+        description: String!
+        title: String!
+        image: String
+        link: String
+    }
+
     type Query {
         me: User
     }
@@ -34,14 +43,7 @@ const typeDefs = gql`
         removeBook(bookId: String!): User
       }
 
-    input BookInput {
-        bookId: String!
-        authors: [String!]!
-        description: String!
-        title: String!
-        image: String
-        link: String
-    }
+    
 `;
 //input type 'BookInput' is created to handle the parameters required for the saveBook mutation. 
 //Allowing us to pass all book-related data as a single input object
