@@ -73,8 +73,8 @@ const SearchBooks = () => {
     }
 
     try {
-      console.log(bookToSave);
-      console.log(token);
+      //console.log(bookToSave);
+      //console.log(token);
       const response = await saveBook({
         variables: { bookData: bookToSave },
         context: {
@@ -83,7 +83,7 @@ const SearchBooks = () => {
           },
         },
       });
-      console.log(response)
+      //console.log(response)
 
       if (response.errors) {
         console.error(response.errors)
