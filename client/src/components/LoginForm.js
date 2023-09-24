@@ -10,7 +10,7 @@ import { LOGIN_USER } from "../utils/mutation.js";
 
 const LoginForm = () => {
   //create instance of mutation
-  const [loginUserMutation, {loading, error}] = useMutation(LOGIN_USER);
+  const [loginUserMutation] = useMutation(LOGIN_USER);
 
   const [userFormData, setUserFormData] = useState({ email: "", password: "" });
   const [validated] = useState(false);
